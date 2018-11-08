@@ -46,15 +46,10 @@ import com.plotsquared.bukkit.database.plotme.LikePlotMeConverter;
 import com.plotsquared.bukkit.database.plotme.PlotMeConnector_017;
 import com.plotsquared.bukkit.generator.BukkitPlotGenerator;
 import com.plotsquared.bukkit.listeners.ChunkListener;
-import com.plotsquared.bukkit.listeners.EntityPortal_1_7_9;
+import com.plotsquared.bukkit.listeners.EntityPortals;
 import com.plotsquared.bukkit.listeners.EntitySpawnListener;
 import com.plotsquared.bukkit.listeners.PlayerEvents;
-import com.plotsquared.bukkit.listeners.PlayerEvents183;
-import com.plotsquared.bukkit.listeners.PlayerEvents_1_8;
-import com.plotsquared.bukkit.listeners.PlayerEvents_1_9;
 import com.plotsquared.bukkit.listeners.PlotPlusListener;
-import com.plotsquared.bukkit.listeners.PlotPlusListener_1_12;
-import com.plotsquared.bukkit.listeners.PlotPlusListener_Legacy;
 import com.plotsquared.bukkit.listeners.SingleWorldListener;
 import com.plotsquared.bukkit.listeners.WorldEvents;
 import com.plotsquared.bukkit.titles.DefaultTitle_111;
@@ -602,32 +597,12 @@ public final class BukkitMain extends JavaPlugin implements Listener, IPlotMain 
         }
         if (PS.get().checkVersion(getServerVersion(), 1, 7, 9)) {
             try {
-                getServer().getPluginManager().registerEvents(new EntityPortal_1_7_9(), this);
+                getServer().getPluginManager().registerEvents(new EntityPortals(), this);
             } catch (Throwable e) {
                 e.printStackTrace();
             }
         }
-        if (PS.get().checkVersion(getServerVersion(), BukkitVersion.v1_8_0)) {
-            try {
-                getServer().getPluginManager().registerEvents(new PlayerEvents_1_8(), this);
-            } catch (Throwable e) {
-                e.printStackTrace();
-            }
-        }
-        if (PS.get().checkVersion(getServerVersion(), BukkitVersion.v1_8_3)) {
-            try {
-                getServer().getPluginManager().registerEvents(new PlayerEvents183(), this);
-            } catch (Throwable e) {
-                e.printStackTrace();
-            }
-        }
-        if (PS.get().checkVersion(getServerVersion(), BukkitVersion.v1_9_0)) {
-            try {
-                getServer().getPluginManager().registerEvents(new PlayerEvents_1_9(main), this);
-            } catch (Throwable e) {
-                e.printStackTrace();
-            }
-        }
+        
     }
 
     @Override
@@ -639,11 +614,6 @@ public final class BukkitMain extends JavaPlugin implements Listener, IPlotMain 
     public void registerPlotPlusEvents() {
         PlotPlusListener.startRunnable(this);
         getServer().getPluginManager().registerEvents(new PlotPlusListener(), this);
-        if (PS.get().checkVersion(getServerVersion(), BukkitVersion.v1_12_0)) {
-            getServer().getPluginManager().registerEvents(new PlotPlusListener_1_12(), this);
-        } else {
-            getServer().getPluginManager().registerEvents(new PlotPlusListener_Legacy(), this);
-        }
     }
 
     @Override

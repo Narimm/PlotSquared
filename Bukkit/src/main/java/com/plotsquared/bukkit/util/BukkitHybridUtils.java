@@ -90,7 +90,7 @@ public class BukkitHybridUtils extends HybridUtils {
                                 // [chunkx, chunkz, pos1x, pos1z, pos2x, pos2z, isedge]
                                 int X = value[0];
                                 int Z = value[1];
-                                short[][] result = gen.generateExtBlockSections(worldObj, r, X, Z, nullBiomeGrid);
+                                ChunkGenerator.ChunkData result = gen.generateChunkData(worldObj, r, X, Z, nullBiomeGrid);
                                 int xb = (X << 4) - bx;
                                 int zb = (Z << 4) - bz;
                                 for (int i = 0; i < result.length; i++) {

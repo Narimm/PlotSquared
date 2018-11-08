@@ -17,8 +17,8 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 
-public class EntityPortal_1_7_9 implements Listener {
-    public EntityPortal_1_7_9() {
+public class EntityPortals implements Listener {
+    public EntityPortals() {
     }
 
     @EventHandler

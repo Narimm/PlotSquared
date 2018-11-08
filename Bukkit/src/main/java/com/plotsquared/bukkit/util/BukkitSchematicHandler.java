@@ -29,6 +29,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static org.bukkit.Material.AIR;
+
 /**
  * Schematic Handler.
  */
@@ -150,7 +152,7 @@ public class BukkitSchematicHandler extends SchematicHandler {
                                                 int rx = x - bx;
                                                 int index = i2 + rx;
                                                 Block block = worldObj.getBlockAt(x, y, z);
-                                                int id = block.getTypeId();
+                                                int id = block.getType().getId();
                                                 switch (id) {
                                                     case 0:
                                                     case 2:

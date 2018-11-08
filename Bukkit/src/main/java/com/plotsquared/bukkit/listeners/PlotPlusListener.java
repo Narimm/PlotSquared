@@ -16,6 +16,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -23,6 +24,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -177,6 +179,23 @@ public class PlotPlusListener extends PlotListener implements Listener {
             this.interval = interval;
             this.amount = amount;
             this.max = max;
+        }
+    }
+    
+    @EventHandler
+    public void onItemPickup(EntityPickupItemEvent event) {
+        LivingEntity ent = event.getEntity();
+        if (ent instanceof Player) {
+            Player player = (Player) ent;
+            PlotPlayer pp = BukkitUtil.getPlayer(player);
+            Plot plot = BukkitUtil.getLocation(player).getOwnedPlot();
+            if (plot == null) {
+                return;
+            }
+            UUID uuid = pp.getUUID();
+            if (!plot.isAdded(uuid) && Flags.DROP_PROTECTION.isTrue(plot)) {
+                event.setCancelled(true);
+            }
         }
     }
 
